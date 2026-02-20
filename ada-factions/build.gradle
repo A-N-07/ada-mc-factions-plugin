@@ -53,3 +53,17 @@ processResources {
         expand props
     }
 }
+
+tasks.register('copyJar', Copy) {
+    from tasks.named('jar')
+    into "C:\\Users\\User_2\\Desktop\\minecraft-server\\plugins"
+}
+
+tasks.register('restartServer', Exec) {
+    dependsOn('copyJar')
+    commandLine 'cmd', '/c', 'C:\\Users\\User_2\\Desktop\\minecraft-server\\restart.bat'
+}
+
+tasks.named('build') {
+    dependsOn('jar', 'copyJar', 'restartServer')
+}
