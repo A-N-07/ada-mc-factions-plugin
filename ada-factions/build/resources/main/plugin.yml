@@ -1,0 +1,4 @@
+name: ada-factions
+version: '1.0-SNAPSHOT'
+main: nl.a_n_07.adaFactions.AdaFactions
+api-version: '1.21'
