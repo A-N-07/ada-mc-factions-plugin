@@ -1,5 +1,11 @@
 package nl.a_n_07.adaFactions;
 
+import nl.a_n_07.adaFactions.commands.AddRegionCommand;
+import nl.a_n_07.adaFactions.commands.DeleteRegionCommand;
+import nl.a_n_07.adaFactions.commands.EditRegionNameCommand;
+import nl.a_n_07.adaFactions.commands.RemoveRegionCommand;
+import nl.a_n_07.adaFactions.listeners.BlockBreakListener;
+import nl.a_n_07.adaFactions.managers.RegionManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -11,6 +17,18 @@ public final class AdaFactions extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         getServer().getPluginManager().registerEvents(this, this);
+
+        // Managers
+        RegionManager regionManager = new RegionManager();
+
+        // Listeners
+        
+
+        // Commands
+        getCommand("addregion").setExecutor(new AddRegionCommand(regionManager));
+        getCommand("removeregion").setExecutor(new RemoveRegionCommand(regionManager));
+        getCommand("editregionname").setExecutor(new EditRegionNameCommand(regionManager));
+        getCommand("deleteregion").setExecutor(new DeleteRegionCommand());
     }
 
     @Override
