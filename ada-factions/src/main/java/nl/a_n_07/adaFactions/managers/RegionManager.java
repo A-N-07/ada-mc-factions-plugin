@@ -47,4 +47,6 @@ public class RegionManager {
         Region region = findRegionByName(oldName);
         region.setName(newName);
     }
+
+    public List<Region> getRegions() { return regions; }
 }
