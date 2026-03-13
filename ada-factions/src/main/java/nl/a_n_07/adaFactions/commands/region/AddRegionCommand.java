@@ -1,21 +1,18 @@
-package nl.a_n_07.adaFactions.commands;
+package nl.a_n_07.adaFactions.commands.region;
 
 import nl.a_n_07.adaFactions.managers.RegionManager;
 import nl.a_n_07.adaFactions.models.Region;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
-public class AddRegionCommand implements CommandExecutor {
+public class AddRegionCommand {
     private RegionManager regionManager;
 
     public AddRegionCommand(RegionManager regionManager) {
         this.regionManager = regionManager;
     }
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public boolean execute(CommandSender sender, String[] args) {
+
         try {
             String name = args[0];
             int x1 = Integer.parseInt(args[1]);
