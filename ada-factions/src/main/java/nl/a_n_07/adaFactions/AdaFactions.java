@@ -1,7 +1,9 @@
 package nl.a_n_07.adaFactions;
 
+import nl.a_n_07.adaFactions.commands.faction.FactionCommand;
 import nl.a_n_07.adaFactions.commands.region.*;
 import nl.a_n_07.adaFactions.listeners.BlockBreakListener;
+import nl.a_n_07.adaFactions.managers.FactionManager;
 import nl.a_n_07.adaFactions.managers.RegionManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,12 +24,14 @@ public final class AdaFactions extends JavaPlugin implements Listener {
 
         // Managers
         RegionManager regionManager = new RegionManager();
+        FactionManager factionManager = new FactionManager();
 
         // Listeners
         getServer().getPluginManager().registerEvents(new BlockBreakListener(regionManager),this);
 
         // Commands
         getCommand("region").setExecutor(new RegionCommand(regionManager));
+        getCommand("faction").setExecutor(new FactionCommand(factionManager));
     }
 
     @Override
