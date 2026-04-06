@@ -18,7 +18,7 @@ public class  ListRegionsCommand {
     public boolean execute(CommandSender sender, String[] args) {
         List<Region> regions = regionManager.getRegions();
         for (Region region : regions) {
-            sender.sendMessage(region.getName()+ " coords: " + region.getMinX()+ " " + region.getMaxX() + " " + region.getMinY()+ " " + region.getMaxY()  + " " + region.getMinZ()+ " " + region.getMaxZ());
+            sender.sendMessage("Name: " + region.getName() + " coords: " + region.getMinX()+ " " + region.getMaxX() + " " + region.getMinY()+ " " + region.getMaxY()  + " " + region.getMinZ()+ " " + region.getMaxZ());
         }
         return true;
     }

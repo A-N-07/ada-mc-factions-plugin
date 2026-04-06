@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Faction {
     private String name;
-    private List<Player> members;
+    private List<AdaPlayer> members;
 
-    public void addPlayer(Player player) {
-        members.add(player);
+    public void addPlayer(AdaPlayer adaPlayer) {
+        members.add(adaPlayer);
     }
 
-    public void removePlayer(Player player) {
-        members.remove(player);
+    public void removePlayer(AdaPlayer adaPlayer) {
+        members.remove(adaPlayer);
     }
 
     public Faction(String name){
@@ -26,7 +26,7 @@ public class Faction {
         this.name = name;
     }
 
-    public List<Player> getMembers() {
+    public List<AdaPlayer> getMembers() {
         return members;
     }
 }

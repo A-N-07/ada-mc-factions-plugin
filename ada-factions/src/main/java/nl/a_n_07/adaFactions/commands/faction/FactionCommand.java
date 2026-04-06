@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import java.util.Arrays;
 
 public class FactionCommand implements CommandExecutor {
     private FactionManager factionManager;
@@ -18,10 +19,10 @@ public class FactionCommand implements CommandExecutor {
         if (args.length == 0) return false;
 
         switch (args[0].toLowerCase()) {
-            case "add": return new AddFactionCommand(factionManager).execute(sender, args);
-            case "remove": return new RemoveFactionCommand(factionManager).execute(sender, args);
-            case "editname": return new EditNameFactionCommand(factionManager).execute(sender, args);
-            case "list": return new ListFactionCommand(factionManager).execute(sender, args);
+            case "add": return new AddFactionCommand(factionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
+            case "remove": return new RemoveFactionCommand(factionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
+            case "editname": return new EditNameFactionCommand(factionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
+            case "list": return new ListFactionCommand(factionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
             default:
                 sender.sendMessage(ChatColor.RED + "Unknown command");
                 return true;

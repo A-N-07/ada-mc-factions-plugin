@@ -2,6 +2,7 @@ package nl.a_n_07.adaFactions.commands.region;
 
 import nl.a_n_07.adaFactions.managers.RegionManager;
 import nl.a_n_07.adaFactions.models.Region;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class AddRegionCommand {
@@ -12,6 +13,10 @@ public class AddRegionCommand {
     }
 
     public boolean execute(CommandSender sender, String[] args) {
+        if(regionManager.regionExists(args[0])) {
+            sender.sendMessage(ChatColor.RED + "Region already exists!");
+            return true;
+        }
 
         try {
             String name = args[0];

@@ -1,18 +1,23 @@
 package nl.a_n_07.adaFactions.managers;
 
 import nl.a_n_07.adaFactions.models.AdaPlayer;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
+import nl.a_n_07.adaFactions.repositories.PlayerRepository;
 import java.util.List;
 import java.util.UUID;
 
 public class PlayerManager {
-    private List<AdaPlayer> adaPlayers = new ArrayList<>();
+    private final List<AdaPlayer> adaPlayers;
+    private final PlayerRepository playerRepository;
+
+    public PlayerManager(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+        this.adaPlayers = this.playerRepository.loadAll();
+    }
 
     public void addPlayer(AdaPlayer adaPlayer) {
         if (playerExists(adaPlayer.getUuid())) return;
         adaPlayers.add(adaPlayer);
+        playerRepository.save(adaPlayer);
     }
 
     public boolean playerExists(UUID uuid) {

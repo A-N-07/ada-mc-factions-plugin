@@ -1,20 +1,29 @@
 package nl.a_n_07.adaFactions.managers;
 
 import nl.a_n_07.adaFactions.models.Faction;
+import nl.a_n_07.adaFactions.repositories.FactionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FactionManager {
-    private List<Faction> factions = new ArrayList<>();
+    private final List<Faction> factions;
+    private final FactionRepository factionRepository;
+
+    public FactionManager(FactionRepository factionRepository) {
+        this.factionRepository = factionRepository;
+        this.factions = factionRepository.loadAll();
+    }
 
     public void addFaction(Faction faction) {
         factions.add(faction);
+        factionRepository.save(faction);
     }
 
     public void removeFaction(String name) {
         Faction faction = findFactionByName(name);
         factions.remove(faction);
+        factionRepository.delete(name);
     }
 
     public Faction findFactionByName(String name) {
@@ -41,5 +50,14 @@ public class FactionManager {
 
     public List<Faction> getFactions() {
         return factions;
+    }
+
+    public Faction getFactionByName(String name) {
+        for (Faction faction : factions) {
+            if (faction.getName().equals(name)) {
+                return faction;
+            }
+        }
+        throw new IllegalStateException("Faction with name " + name + " not found");
     }
 }

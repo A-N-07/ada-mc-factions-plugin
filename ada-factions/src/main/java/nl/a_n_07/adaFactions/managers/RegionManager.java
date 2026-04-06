@@ -1,13 +1,18 @@
 package nl.a_n_07.adaFactions.managers;
 
 import nl.a_n_07.adaFactions.models.Region;
+import nl.a_n_07.adaFactions.repositories.RegionRepository;
 import org.bukkit.block.Block;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegionManager {
-    private List<Region> regions = new ArrayList<>();
+    private final List<Region> regions;
+    private final RegionRepository regionRepository;
+
+    public RegionManager(RegionRepository regionRepository) {
+        this.regionRepository = regionRepository;
+        regions = this.regionRepository.loadAll();
+    }
 
     public boolean findOverlappingRegion(Block block) {
         for (Region region : regions) {
@@ -24,16 +29,24 @@ public class RegionManager {
     }
 
     public void addRegion(Region region) {
-        Region overlappingRegion = findOverlappingRegion(region);
-        if (overlappingRegion == null) {
-            regions.add(region);
-        } else {
-            throw new IllegalArgumentException("New Region named: " + region.getName() + "overlaps with existing region named: " + overlappingRegion.getName());
+        if (regionExists(region.getName())){
+            throw new IllegalArgumentException("The region named " + region.getName() + " already exists!");
         }
+
+        Region overlappingRegion = findOverlappingRegion(region);
+        if (overlappingRegion != null) {
+            throw new IllegalArgumentException("New Region named: " + region.getName() + " overlaps with existing region named: " + overlappingRegion.getName());
+        }
+
+        regions.add(region);
+        regionRepository.save(region);
     }
 
     public void removeRegion(String name) {
-        regions.remove(findRegionByName(name));
+        Region region = findRegionByName(name);
+        regions.remove(region);
+        regionRepository.delete(name);
+
     }
 
     public Region findRegionByName(String name) {
@@ -48,5 +61,14 @@ public class RegionManager {
         region.setName(newName);
     }
 
-    public List<Region> getRegions() { return regions; }
+    public boolean regionExists(String name) {
+        for (Region region : regions) {
+            if (region.getName().equalsIgnoreCase(name)) return true;
+        }
+        return false;
+    }
+
+    public List<Region> getRegions() {
+        return regions;
+    }
 }
