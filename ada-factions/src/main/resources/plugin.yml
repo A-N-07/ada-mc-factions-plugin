@@ -4,47 +4,23 @@ main: nl.a_n_07.adaFactions.AdaFactions
 api-version: '1.21'
 
 commands:
-  addregion:
-    description: Adds a protected region
-    usage: /addregion <name> <x1> <x2> <y1> <y2> <z1> <z2>
-    permission: adafactions.op
+  region:
+    description: Region Commands
+    usage: /region <add|remove|edit|show>
+  faction:
+    description: Faction Commands
+    usage: /faction <add|remove|edit|show>
+  player:
+    description: player commands
+    usage: /player <list|setfaction>
+  lobby:
+    description: lobby commands
+    usage: /lobby <set|unset>
 
-  removeregion:
-    description: Removes a protected region
-    usage: /removeregion <name>
-    permission: adafactions.op
-
-  editregionname:
-    description: Renames a protected region
-    usage: /editregionname <oldname> <newname>
-    permission: adafactions.op
-
-  deleteregion:
-    description: reminds player the right command for removing a region
-    usage: /deleteregion <name>
-    permission: adafactions.op
-
-  setlobby:
-    description: sets a region as a lobby
-    usage: /setlobby <region name>
-    permission: adafactions.op
-
-  showregions:
-    descriptions: shows regions to player
-    usage: /showregions
-    permission: adafactions.op
-
-#  addfaction:
-#    description:
-#    usage:
-#    permission:
-#
-#  removefaction:
-#    description:
-#    usage:
-#    permission:
-#
-#  addfaction:
-#    description:
-#    usage:
-#    permission:
+permissions:
+  adafactions.op:
+    description: Admin commands
+    default: op
+  adafactions.mod:
+    description: Moderator commands
+    default: op

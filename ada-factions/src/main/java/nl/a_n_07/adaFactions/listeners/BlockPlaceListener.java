@@ -6,29 +6,30 @@ import nl.a_n_07.adaFactions.managers.RegionManager;
 import nl.a_n_07.adaFactions.models.AdaPlayer;
 import nl.a_n_07.adaFactions.models.Faction;
 import nl.a_n_07.adaFactions.models.Region;
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 
-public class BlockBreakListener implements Listener {
+import java.util.Objects;
+
+public class BlockPlaceListener implements Listener {
     private final RegionManager regionManager;
     private final PlayerManager playerManager;
     private final FactionManager factionManager;
 
-    public BlockBreakListener(RegionManager regionManager, PlayerManager playerManager, FactionManager factionManager) {
+    public BlockPlaceListener(RegionManager regionManager, PlayerManager playerManager, FactionManager factionManager) {
         this.regionManager = regionManager;
         this.playerManager = playerManager;
         this.factionManager = factionManager;
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
+    public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         AdaPlayer adaPlayer = playerManager.getPlayer(player.getUniqueId());
-        Block block = event.getBlock();
+        Block block = event.getBlockPlaced();
         Region region = regionManager.getRegionAt(block);
 
         if (region == null) return;
@@ -37,7 +38,6 @@ public class BlockBreakListener implements Listener {
 
         if (regionFactionName == null) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "Block break cancelled");
             return;
         }
 
@@ -47,7 +47,6 @@ public class BlockBreakListener implements Listener {
 
         if (!isMember) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "Block break cancelled");
         }
     }
 }
