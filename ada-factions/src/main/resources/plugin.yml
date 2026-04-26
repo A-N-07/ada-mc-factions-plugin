@@ -10,7 +10,12 @@ commands:
   faction:
     description: Faction Commands
     usage: /faction <add|remove|edit|show>
+  player:
+    description: player commands
+    usage: /player <list|setfaction>
   lobby:
+    description: lobby commands
+    usage: /lobby <set|unset>
 
 permissions:
   adafactions.op:
