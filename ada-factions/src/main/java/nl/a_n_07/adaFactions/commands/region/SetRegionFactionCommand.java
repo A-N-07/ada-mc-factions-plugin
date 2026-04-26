@@ -17,15 +17,20 @@ public class SetRegionFactionCommand {
     }
 
     public boolean execute(CommandSender sender, String[] args) {
-        try{
+        if (args.length < 2) {
+            sender.sendMessage("Usage: /region setfaction <regionname> <factionname>");
+            return true;
+        }
+
+        try {
             Region region = regionManager.getRegionByName(args[0]);
             Faction faction = factionManager.getFactionByName(args[1]);
             region.setFactionName(faction.getName());
             regionManager.updateRegion(region);
+            sender.sendMessage(ChatColor.GREEN + "Faction " + faction.getName() + " assigned to region " + region.getName());
         } catch (IllegalArgumentException e) {
             sender.sendMessage(ChatColor.RED + e.getMessage());
         }
-
 
         return true;
     }
