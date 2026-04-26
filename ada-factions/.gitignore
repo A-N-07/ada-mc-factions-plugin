@@ -1,0 +1,14 @@
+# Gradle build folders and cache
+.gradle/
+build/
+
+# IntelliJ project files
+.idea/
+*.iml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: logs or temp files
+*.log

@@ -1,0 +1,26 @@
+name: ada-factions
+version: '1.0'
+main: nl.a_n_07.adaFactions.AdaFactions
+api-version: '1.21'
+
+commands:
+  region:
+    description: Region Commands
+    usage: /region <add|remove|edit|show>
+  faction:
+    description: Faction Commands
+    usage: /faction <add|remove|edit|show>
+  player:
+    description: player commands
+    usage: /player <list|setfaction>
+  lobby:
+    description: lobby commands
+    usage: /lobby <set|unset>
+
+permissions:
+  adafactions.op:
+    description: Admin commands
+    default: op
+  adafactions.mod:
+    description: Moderator commands
+    default: op
