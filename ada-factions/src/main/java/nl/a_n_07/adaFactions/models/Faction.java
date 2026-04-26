@@ -1,12 +1,19 @@
 package nl.a_n_07.adaFactions.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Faction {
     private String name;
     private List<AdaPlayer> members;
 
+    public Faction(String name) {
+        this.name = name;
+        this.members = new ArrayList<>();
+    }
+
     public void addPlayer(AdaPlayer adaPlayer) {
+        if (members == null) members = new ArrayList<>();
         members.add(adaPlayer);
     }
 
@@ -14,9 +21,7 @@ public class Faction {
         members.remove(adaPlayer);
     }
 
-    public Faction(String name){
-        this.name = name;
-    }
+
 
     public String getName() {
         return name;
@@ -27,6 +32,7 @@ public class Faction {
     }
 
     public List<AdaPlayer> getMembers() {
+        if (members == null) members = new ArrayList<>();
         return members;
     }
 }

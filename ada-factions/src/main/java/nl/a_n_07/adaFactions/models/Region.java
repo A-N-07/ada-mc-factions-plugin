@@ -69,4 +69,8 @@ public class Region {
     public int getMaxZ() {return maxZ;}
 
     public void setMaxZ(int maxZ) {this.maxZ = maxZ;}
+
+    public String getFactionName() { return factionName; }
+
+    public void setFactionName(String factionName) { this.factionName = factionName; }
 }

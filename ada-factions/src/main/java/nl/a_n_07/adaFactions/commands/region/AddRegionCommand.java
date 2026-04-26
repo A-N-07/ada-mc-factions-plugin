@@ -13,7 +13,12 @@ public class AddRegionCommand {
     }
 
     public boolean execute(CommandSender sender, String[] args) {
-        if(regionManager.regionExists(args[0])) {
+        if (args.length < 7) {
+            sender.sendMessage("Usage: /region add <name> <x1> <x2> <y1> <y2> <z1> <z2>");
+            return true;
+        }
+
+        if (regionManager.regionExists(args[0])) {
             sender.sendMessage(ChatColor.RED + "Region already exists!");
             return true;
         }
@@ -27,12 +32,10 @@ public class AddRegionCommand {
             int z1 = Integer.parseInt(args[5]);
             int z2 = Integer.parseInt(args[6]);
 
-            regionManager.addRegion(new Region(name,x1,x2,y1,y2,z1,z2));
+            regionManager.addRegion(new Region(name, x1, x2, y1, y2, z1, z2));
             sender.sendMessage("Region " + name + " successfully added");
         } catch (NumberFormatException e) {
-            sender.sendMessage("Coordinates must be an number");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            sender.sendMessage("Usage: /addregion <name> <x1> <x2> <y1> <y2> <z1> <z2>");
+            sender.sendMessage("Coordinates must be a number");
         } catch (IllegalArgumentException e) {
             sender.sendMessage(e.getMessage());
         }

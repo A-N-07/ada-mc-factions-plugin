@@ -1,9 +1,8 @@
 package nl.a_n_07.adaFactions.managers;
 
+import nl.a_n_07.adaFactions.models.AdaPlayer;
 import nl.a_n_07.adaFactions.models.Faction;
 import nl.a_n_07.adaFactions.repositories.FactionRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FactionManager {
@@ -21,12 +20,12 @@ public class FactionManager {
     }
 
     public void removeFaction(String name) {
-        Faction faction = findFactionByName(name);
+        Faction faction = getFactionByName(name);
         factions.remove(faction);
         factionRepository.delete(name);
     }
 
-    public Faction findFactionByName(String name) {
+    public Faction getFactionByName(String name) {
         for (Faction faction : factions) {
             if (faction.getName().equals(name)) {
                 return faction;
@@ -36,28 +35,33 @@ public class FactionManager {
     }
 
     public void editFactionName(String oldName, String newName) {
-        Faction faction = findFactionByName(oldName);
+        Faction faction = getFactionByName(oldName);
         faction.setName(newName);
+    }
+
+    public void updateFaction(Faction faction) {
+        factionRepository.update(faction);
     }
 
     public boolean factionExists(String name) {
         for (Faction faction : factions) {
-            if (faction.getName().equalsIgnoreCase(name));
-            return true;
+            if (faction.getName().equalsIgnoreCase(name)){ return true; }
         }
         return false;
+    }
+
+    public Faction getFactionByPlayer(AdaPlayer adaPlayer) {
+        for (Faction faction : factions) {
+            for (AdaPlayer member : faction.getMembers()) {
+                if (member.getUuid().equals(adaPlayer.getUuid())) return faction;
+            }
+        }
+        return null;
     }
 
     public List<Faction> getFactions() {
         return factions;
     }
 
-    public Faction getFactionByName(String name) {
-        for (Faction faction : factions) {
-            if (faction.getName().equals(name)) {
-                return faction;
-            }
-        }
-        throw new IllegalStateException("Faction with name " + name + " not found");
-    }
+
 }

@@ -1,5 +1,6 @@
 package nl.a_n_07.adaFactions.commands.region;
 
+import nl.a_n_07.adaFactions.managers.FactionManager;
 import nl.a_n_07.adaFactions.managers.RegionManager;
 import nl.a_n_07.adaFactions.utils.PermissionUtil;
 import org.bukkit.ChatColor;
@@ -10,9 +11,11 @@ import java.util.Arrays;
 
 public class RegionCommand implements CommandExecutor {
     private RegionManager regionManager;
+    private FactionManager factionManager;
 
-    public RegionCommand(RegionManager regionManager) {
+    public RegionCommand(RegionManager regionManager, FactionManager factionManager) {
         this.regionManager = regionManager;
+        this.factionManager = factionManager;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class RegionCommand implements CommandExecutor {
             case "remove": return new RemoveRegionCommand(regionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
             case "editname": return new EditRegionNameCommand(regionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
             case "list": return new ListRegionsCommand(regionManager).execute(sender, Arrays.copyOfRange(args, 1, args.length));
+            case "setfaction": return new SetRegionFactionCommand(regionManager, factionManager).execute(sender,Arrays.copyOfRange(args, 1, args.length));
             default:
                 sender.sendMessage(ChatColor.RED + "Unknown command");
                 return true;

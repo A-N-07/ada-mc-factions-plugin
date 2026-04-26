@@ -17,7 +17,7 @@ public class AddFactionCommand {
         }
 
         try {
-            factionManager.addFaction(new Faction(args[1]));
+            factionManager.addFaction(new Faction(args[0]));
             sender.sendMessage("Faction " + args[0] + " successfully added.");
         } catch (ArrayIndexOutOfBoundsException e) {
             sender.sendMessage("Usage: /faction add <name>");
