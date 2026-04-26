@@ -4,7 +4,8 @@ import java.util.UUID;
 
 public class AdaPlayer {
     private String name;
-    private UUID uuid;
+    private final UUID uuid;
+    private String factionName;
 
     public AdaPlayer(String name, UUID uuid) {
         this.name = name;
@@ -22,4 +23,8 @@ public class AdaPlayer {
     public UUID getUuid() {
         return uuid;
     }
+
+    public String getFactionName() { return factionName; }
+
+    public void setFactionName(String factionName) { this.factionName = factionName; }
 }
